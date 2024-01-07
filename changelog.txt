@@ -1,6 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 06JAN2024
+  Changes:
     - removed dependency on simhelper
     - removed main menu simulationn integration
+---------------------------------------------------------------------------------------------------
 Version: 0.0.2
 Date: 30SEP2023
   Changes:
