@@ -57,7 +57,7 @@ local function spill_grid(entity)
         local take_result = equipment.prototype.take_result
         local name = take_result and take_result.name
         if name then
-            local item_stack = {name = name, count = 1}
+            local item_stack = { name = name, count = 1 }
             local spilled_items = surface.spill_item_stack(position, item_stack, enable_looted, force, allow_belts)
         end
     end
