@@ -5,9 +5,10 @@ Spills the inventory of anything that dies onto the ground around it. This inclu
 
 ---------------------
 # Features
-- when anything with an inventory is destroyed, the contents of its inventories are spilled on the ground around it
-- when anything with an equipment grid is destroyed, the contents of the grid are spilled on the ground around it
-- main menu background simulation integration
+- When anything with an inventory is destroyed, the contents of its inventories are spilled on the ground around it
+- When anything with an equipment grid is destroyed, the contents of the grid are spilled on the ground around it
+- Spilled items are automatically picked up by players who walk near them
+- Includes main menu background simulation integration
 
 ---------------------
 # Compatibility
