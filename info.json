@@ -1,14 +1,18 @@
 
 {
     "name": "spill_inventory",
-    "version": "0.0.4",
+    "version": "0.1.0",
     "title": "Spill Inventory",
     "author": "asher_sky",
     "contact": "",
     "homepage": "",
-    "description": "When something dies, its inventory is spilled on the ground around it. This includes the player, vehicles, machines, and anything else with an inventory. This also includes the contents of any equipment grids, and the inventories of any equipment in those grids.",
-    "factorio_version": "1.1",
+    "description": "Spills the inventory of anything that dies onto the ground around it.",
+    "factorio_version": "2.0",
     "dependencies": [
         "base"
-    ]
+    ],
+    "package": {
+        "readme": "README.md",
+        "sync_portal_details": true
+    }
 }

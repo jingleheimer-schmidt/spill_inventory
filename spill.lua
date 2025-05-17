@@ -8,12 +8,21 @@ local function spill_inventory(inventory, surface, position)
         local enable_looted = true
         local force = nil
         local allow_belts = false
-        for name, count in pairs(contents) do
+        for _, item_with_quality in pairs(contents) do
             local spilled_count = 0
-            while spilled_count < count do
-                local item_stack = inventory.find_item_stack(name)
+            local item_count = item_with_quality.count
+            local item_name = item_with_quality.name
+            local item_quality = item_with_quality.quality
+            while spilled_count < item_count do
+                local item_stack = inventory.find_item_stack { name = item_name, quality = item_quality }
                 if item_stack then
-                    local spilled_items = surface.spill_item_stack(position, item_stack, enable_looted, force, allow_belts)
+                    local spilled_items = surface.spill_item_stack {
+                        position = position,
+                        stack = item_stack,
+                        enable_looted = enable_looted,
+                        force = force,
+                        allow_belts = allow_belts,
+                    }
                     spilled_count = spilled_count + #spilled_items
                     inventory.remove(item_stack)
                 end
@@ -26,7 +35,7 @@ end
 local function spill_inventories(entity)
     local surface = entity.surface
     local position = entity.position
-    for i = 1, 8 do
+    for i = 1, 11 do
         local inventory = entity.get_inventory(i)
         spill_inventory(inventory, surface, position)
     end
@@ -57,8 +66,14 @@ local function spill_grid(entity)
         local take_result = equipment.prototype.take_result
         local name = take_result and take_result.name
         if name then
-            local item_stack = { name = name, count = 1 }
-            local spilled_items = surface.spill_item_stack(position, item_stack, enable_looted, force, allow_belts)
+            local item_stack = { name = name, count = 1, quality = equipment.quality }
+            local spilled_items = surface.spill_item_stack {
+                position = position,
+                stack = item_stack,
+                enable_looted = enable_looted,
+                force = force,
+                allow_belts = allow_belts,
+            }
         end
     end
     grid.clear()

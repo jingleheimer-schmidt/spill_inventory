@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 17MAY2025
+  Changes:
+    - updated to support Factorio 2.0
+    - updated mod description
+    - updated mod thumbnail
+    - updated license year
+  Locale:
+    - added Ukrainian (uk) locale from Crowdin
+---------------------------------------------------------------------------------------------------
 Version: 0.0.4
 Date: 01OCT2024
   Changes:
