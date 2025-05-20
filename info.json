@@ -4,8 +4,6 @@
     "version": "0.2.0",
     "title": "Spill Inventory",
     "author": "asher_sky",
-    "contact": "",
-    "homepage": "",
     "description": "Spills the inventory of anything that dies onto the ground around it.",
     "factorio_version": "2.0",
     "dependencies": [
