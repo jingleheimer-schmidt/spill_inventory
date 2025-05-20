@@ -35,14 +35,8 @@ local function spill_grid(entity)
     for _, equipment in pairs(grid_equipment) do
         local burner = equipment.burner
         if burner and burner.valid then
-            local burnt_result_inventory = burner.burnt_result_inventory
-            if burnt_result_inventory and burnt_result_inventory.valid then
-                spill_inventory(burnt_result_inventory, surface, position)
-            end
-            local inventory = burner.inventory
-            if inventory and inventory.valid then
-                spill_inventory(inventory, surface, position)
-            end
+            spill_inventory(burner.burnt_result_inventory, surface, position)
+            spill_inventory(burner.inventory, surface, position)
         end
         local take_result = equipment.prototype.take_result
         local name = take_result and take_result.name
