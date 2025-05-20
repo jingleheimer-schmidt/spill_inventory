@@ -41,7 +41,8 @@ local function spill_grid(entity)
         local take_result = equipment.prototype.take_result
         local name = take_result and take_result.name
         if name then
-            local item_stack = { name = name, count = 1, quality = equipment.quality }
+            ---@type ItemStackDefinition
+            local item_stack = { name = name, count = 1, quality = equipment.quality.name }
             local spilled_items = surface.spill_item_stack {
                 position = position,
                 stack = item_stack,
