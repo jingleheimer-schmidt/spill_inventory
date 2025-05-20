@@ -2,6 +2,7 @@
 Version: 0.2.0
 Date: ????
   Changes:
+    - updated to utilize native spill_inventory API introduced in Factorio 2.0.51
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 2025-05-17

@@ -3,32 +3,13 @@
 ---@param surface LuaSurface
 ---@param position MapPosition
 local function spill_inventory(inventory, surface, position)
-    if inventory and inventory.valid then
-        local contents = inventory.get_contents()
-        local enable_looted = true
-        local force = nil
-        local allow_belts = false
-        for _, item_with_quality in pairs(contents) do
-            local spilled_count = 0
-            local item_count = item_with_quality.count
-            local item_name = item_with_quality.name
-            local item_quality = item_with_quality.quality
-            while spilled_count < item_count do
-                local item_stack = inventory.find_item_stack { name = item_name, quality = item_quality }
-                if item_stack then
-                    local spilled_items = surface.spill_item_stack {
-                        position = position,
-                        stack = item_stack,
-                        enable_looted = enable_looted,
-                        force = force,
-                        allow_belts = allow_belts,
-                    }
-                    spilled_count = spilled_count + #spilled_items
-                    inventory.remove(item_stack)
-                end
-            end
-        end
-    end
+    if not (inventory and inventory.valid) then return end
+    surface.spill_inventory {
+        inventory = inventory,
+        position = position,
+        allow_belts = false,
+        enable_looted = true,
+    }
 end
 
 ---@param entity LuaEntity
