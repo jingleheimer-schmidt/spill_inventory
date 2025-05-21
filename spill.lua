@@ -29,9 +29,6 @@ local function spill_grid(entity)
     local grid_equipment = grid.equipment
     local surface = entity.surface
     local position = entity.position
-    local enable_looted = true
-    local force = nil
-    local allow_belts = false
     for _, equipment in pairs(grid_equipment) do
         local burner = equipment.burner
         if burner and burner.valid then
@@ -43,12 +40,11 @@ local function spill_grid(entity)
         if name then
             ---@type ItemStackDefinition
             local item_stack = { name = name, count = 1, quality = equipment.quality.name }
-            local spilled_items = surface.spill_item_stack {
-                position = position,
+            surface.spill_item_stack {
                 stack = item_stack,
-                enable_looted = enable_looted,
-                force = force,
-                allow_belts = allow_belts,
+                position = position,
+                allow_belts = false,
+                enable_looted = true,
             }
         end
     end
