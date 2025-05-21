@@ -70,6 +70,7 @@ local function on_player_died(event)
     local character = player.character
     if not (character and character.valid) then return end
     spill_inventories(character)
+    spill_grid(character)
 end
 
 ---@param event EventData.on_post_entity_died
