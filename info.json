@@ -1,7 +1,7 @@
 
 {
     "name": "spill_inventory",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "title": "Spill Inventory",
     "author": "asher_sky",
     "description": "Spills the inventory of anything that dies onto the ground around it.",
