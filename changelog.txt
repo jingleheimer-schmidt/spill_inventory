@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
-Date: ????
+Date: 2025-05-23
   Changes:
     - updated to utilize native spill_inventory API introduced in Factorio 2.0.51
     - added ability to spill player character grids if they exist
