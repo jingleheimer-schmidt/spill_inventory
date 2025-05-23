@@ -3,32 +3,13 @@
 ---@param surface LuaSurface
 ---@param position MapPosition
 local function spill_inventory(inventory, surface, position)
-    if inventory and inventory.valid then
-        local contents = inventory.get_contents()
-        local enable_looted = true
-        local force = nil
-        local allow_belts = false
-        for _, item_with_quality in pairs(contents) do
-            local spilled_count = 0
-            local item_count = item_with_quality.count
-            local item_name = item_with_quality.name
-            local item_quality = item_with_quality.quality
-            while spilled_count < item_count do
-                local item_stack = inventory.find_item_stack { name = item_name, quality = item_quality }
-                if item_stack then
-                    local spilled_items = surface.spill_item_stack {
-                        position = position,
-                        stack = item_stack,
-                        enable_looted = enable_looted,
-                        force = force,
-                        allow_belts = allow_belts,
-                    }
-                    spilled_count = spilled_count + #spilled_items
-                    inventory.remove(item_stack)
-                end
-            end
-        end
-    end
+    if not (inventory and inventory.valid) then return end
+    surface.spill_inventory {
+        inventory = inventory,
+        position = position,
+        allow_belts = false,
+        enable_looted = true,
+    }
 end
 
 ---@param entity LuaEntity
@@ -48,31 +29,22 @@ local function spill_grid(entity)
     local grid_equipment = grid.equipment
     local surface = entity.surface
     local position = entity.position
-    local enable_looted = true
-    local force = nil
-    local allow_belts = false
     for _, equipment in pairs(grid_equipment) do
         local burner = equipment.burner
         if burner and burner.valid then
-            local burnt_result_inventory = burner.burnt_result_inventory
-            if burnt_result_inventory and burnt_result_inventory.valid then
-                spill_inventory(burnt_result_inventory, surface, position)
-            end
-            local inventory = burner.inventory
-            if inventory and inventory.valid then
-                spill_inventory(inventory, surface, position)
-            end
+            spill_inventory(burner.burnt_result_inventory, surface, position)
+            spill_inventory(burner.inventory, surface, position)
         end
         local take_result = equipment.prototype.take_result
         local name = take_result and take_result.name
         if name then
-            local item_stack = { name = name, count = 1, quality = equipment.quality }
-            local spilled_items = surface.spill_item_stack {
-                position = position,
+            ---@type ItemStackDefinition
+            local item_stack = { name = name, count = 1, quality = equipment.quality.name }
+            surface.spill_item_stack {
                 stack = item_stack,
-                enable_looted = enable_looted,
-                force = force,
-                allow_belts = allow_belts,
+                position = position,
+                allow_belts = false,
+                enable_looted = true,
             }
         end
     end
@@ -94,6 +66,7 @@ local function on_player_died(event)
     local character = player.character
     if not (character and character.valid) then return end
     spill_inventories(character)
+    spill_grid(character)
 end
 
 ---@param event EventData.on_post_entity_died
